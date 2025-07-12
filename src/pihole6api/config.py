@@ -101,26 +101,32 @@ class PiHole6Configuration:
         encoded_value = urllib.parse.quote(f"{ip} {host}")
         return self.connection.delete(f"config/dns/hosts/{encoded_value}")
 
-    def add_local_cname(self, host, target, ttl=300):
+    def add_local_cname(self, host, target, ttl=None):
         """
         Add a local CNAME record to Pi-hole.
 
         :param host: The CNAME alias (e.g., "bar.xyz")
         :param target: The target hostname (e.g., "foo.dev")
-        :param ttl: Time-to-live for the record (default: 300)
+        :param ttl: Time-to-live for the record (None for no TTL)
         :return: API response
         """
-        encoded_value = urllib.parse.quote(f"{host},{target},{ttl}")
+        if ttl is None:
+            encoded_value = urllib.parse.quote(f"{host},{target}")
+        else:
+            encoded_value = urllib.parse.quote(f"{host},{target},{ttl}")
         return self.connection.put(f"config/dns/cnameRecords/{encoded_value}")
 
-    def remove_local_cname(self, host, target, ttl=300):
+    def remove_local_cname(self, host, target, ttl=None):
         """
         Remove a local CNAME record from Pi-hole.
 
         :param host: The CNAME alias (e.g., "bar.xyz")
         :param target: The target hostname (e.g., "foo.dev")
-        :param ttl: Time-to-live for the record (default: 300)
+        :param ttl: Time-to-live for the record (None for no TTL)
         :return: API response
         """
-        encoded_value = urllib.parse.quote(f"{host},{target},{ttl}")
+        if ttl is None:
+            encoded_value = urllib.parse.quote(f"{host},{target}")
+        else:
+            encoded_value = urllib.parse.quote(f"{host},{target},{ttl}")
         return self.connection.delete(f"config/dns/cnameRecords/{encoded_value}")
