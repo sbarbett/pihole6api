@@ -24,13 +24,12 @@ class PiHole6ListManagement:
 
         payload = {
             "address": address if isinstance(address, list) else [address],
-            "type": list_type,
             "comment": comment,
             "groups": groups if groups else [],
             "enabled": enabled
         }
 
-        return self.connection.post("lists", data=payload)
+        return self.connection.post("lists", data=payload, params={"type": list_type})
 
     def batch_delete_lists(self, lists):
         """
@@ -76,13 +75,12 @@ class PiHole6ListManagement:
         """
         encoded_address = urllib.parse.quote(address, safe="")
         payload = {
-            "type": list_type,
             "comment": comment,
             "groups": groups if groups else [],
             "enabled": enabled
         }
 
-        return self.connection.put(f"lists/{encoded_address}", data=payload)
+        return self.connection.put(f"lists/{encoded_address}", data=payload, params={"type": list_type})
 
     def delete_list(self, address, list_type):
         """

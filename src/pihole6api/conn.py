@@ -196,21 +196,21 @@ class PiHole6Connection:
         """Send a GET request."""
         return self._do_call("GET", endpoint, params=params, is_binary=is_binary)
 
-    def post(self, endpoint, data=None, files=None):
+    def post(self, endpoint, data=None, files=None, params=None):
         """Send a POST request."""
-        return self._do_call("POST", endpoint, data=data, files=files)
+        return self._do_call("POST", endpoint, params=params, data=data, files=files)
 
-    def put(self, endpoint, data=None):
+    def put(self, endpoint, data=None, params=None):
         """Send a PUT request."""
-        return self._do_call("PUT", endpoint, data=data)
+        return self._do_call("PUT", endpoint, params=params, data=data)
 
     def delete(self, endpoint, params=None, data=None):
         """Send a DELETE request."""
         return self._do_call("DELETE", endpoint, params=params, data=data)
 
-    def patch(self, endpoint, data=None):
+    def patch(self, endpoint, data=None, params=None):
         """Send a PATCH request."""
-        return self._do_call("PATCH", endpoint, data=data)
+        return self._do_call("PATCH", endpoint, params=params, data=data)
     
     def exit(self):
         """Delete the current session and close connections."""
