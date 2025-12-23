@@ -73,6 +73,21 @@ client.list_management.add_list("https://example.com/blocklist.txt", "block")
 client.list_management.delete_list("https://example.com/blocklist.txt", "block")
 ```
 
+#### Manage Local DNS Records
+
+**Note:** Adding/removing local DNS records requires `webserver.api.app_sudo` to be enabled in your Pi-Hole configuration (Settings → API → Web interface).
+
+```python
+# Add A record (hostname to IP mapping)
+client.config.add_local_a_record("foo.dev", "192.168.1.1")
+client.config.remove_local_a_record("foo.dev", "192.168.1.1")
+
+# Add CNAME record (alias to hostname mapping)
+client.config.add_local_cname("bar.xyz", "foo.dev")
+client.config.add_local_cname("bar.xyz", "foo.dev", ttl=3600)  # With TTL
+client.config.remove_local_cname("bar.xyz", "foo.dev")
+```
+
 #### Export/Import PiHole Settings
 
 ```python
