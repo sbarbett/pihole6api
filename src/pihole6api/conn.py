@@ -63,8 +63,9 @@ class PiHole6Connection:
         # Set timeout
         self.session.timeout = connection_timeout
         
-        # Authenticate upon initialization
-        self._authenticate()
+        if password is not None and password != '':
+            # Authenticate upon initialization
+            self._authenticate()
 
     def _authenticate(self):
         """Authenticate with the Pi-hole API and store session ID and CSRF token.
@@ -115,6 +116,9 @@ class PiHole6Connection:
 
     def _get_headers(self):
         """Return headers including the authentication SID and CSRF token."""
+        if self.password is None or self.password == '':
+            return {}
+
         if not self.session_id or not self.csrf_token:
             self._authenticate()
 

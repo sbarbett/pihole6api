@@ -24,7 +24,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "requests >=2.26.0",
+    "requests[socks] >=2.26.0",
 ]
 
 [project.urls]
