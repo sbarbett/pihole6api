@@ -53,7 +53,7 @@ class PiHole6Metrics:
         :param int until_ts: Unix timestamp to filter queries up to this time (optional).
         :param str upstream: Filter queries sent to a specific upstream destination (optional).
         :param str domain: Filter queries for specific domains, supports wildcards `*` (optional).
-        :param str client: Filter queries originating from a specific client (optional).
+        :param str client: Filter queries originating from a specific client IP (optional).
         :param str cursor: Cursor for pagination to fetch the next chunk of results (optional).
         """
         # Check for deprecated "n" parameter
@@ -74,7 +74,7 @@ class PiHole6Metrics:
             "until": until_ts,
             "upstream": upstream,
             "domain": domain,
-            "client": client,
+            "client_ip": client,
             "cursor": cursor,
         }
         # Remove any parameters that are None
